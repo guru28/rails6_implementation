@@ -1,5 +1,6 @@
 class NewslettersController < ApplicationController
-		def index
+	
+  def index
     @newsletters = Newsletter.all
   end
  
@@ -41,10 +42,19 @@ class NewslettersController < ApplicationController
  
     redirect_to newsletters_path
   end
+
+  def send_newsletter
+    @newsletter = Newsletter.find(params[:id])
+    Subcriber.all.each do |user|
+      NewsletterMailer.newsletter_email(user, @newsletter).deliver_now
+    end
+
+    redirect_to newsletters_path
+  end
  
   private
     def newsletter_params
-      params.require(:newsletter).permit(:name, :email)
+      params.require(:newsletter).permit(:subject, :from_address, :content)
     end
 
 end
