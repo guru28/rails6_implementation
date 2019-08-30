@@ -1,0 +1,30 @@
+<p id="notice"><%= notice %></p>
+
+<h1>Listing subcribers</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>Name</th>
+      <th>Email</th>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @subcribers.each do |subcriber| %>
+    <div class="subcriber_wrapper">
+      <tr>
+        <td><%= subcriber.name %></td>
+        <td><%= subcriber.email %></td>
+        <td><%= link_to 'Show', subcriber %></td>
+        <td><%= link_to 'Edit', edit_subcriber_path(subcriber) %></td>
+        <td><%= link_to 'Destroy', subcriber, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'New subcriber', new_subcriber_path %>
