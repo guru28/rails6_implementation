@@ -10,13 +10,14 @@ class RepliesMailbox < ApplicationMailbox
 
   def process
     return if subcriber.nil?
-    body = mail.parts[0].to_s
-    split_array = body.split(" ")
-    range_from = split_array.index("7bit") + 1
-    range_to = split_array.index("On")
+    # body = mail.parts[0].to_s
+    # split_array = body.split(" ")
+    # range_from = split_array.index("7bit") + 1
+    # range_to = split_array.index("On")
     newsletter.comments.create(
       subcriber_id: subcriber.id,
-      body: split_array.slice(range_from...range_to).join(" ")
+      # body: split_array.slice(range_from...range_to).join(" ")
+      body: mail.body.decoded
     )
   end
 

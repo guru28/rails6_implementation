@@ -4,7 +4,7 @@ class CreateComments < ActiveRecord::Migration[6.0]
     	t.text :body
     	t.references :subcriber
     	t.references :newsletter
-
+    	
       t.timestamps
     end
   end
